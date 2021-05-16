@@ -15,20 +15,17 @@ public class Clicker extends JPanel implements ActionListener {
     private boolean check1;
     private boolean check2;
 
-    private final String writeMessage = "Написать сообщение";
-
-    private final JLabel lblName = new JLabel("Имя и фамилия");
-    private final JLabel lblText = new JLabel("Текст");
-
     private final JTextField txtArea1 = new JTextField(15);
     private final JTextField txtArea2 = new JTextField(15);
 
     private final JButton btn = new JButton("Запуск");
 
     public Clicker() {
+        JLabel lblName = new JLabel("Имя и фамилия");
         add(lblName);
         add(txtArea1);
 
+        JLabel lblText = new JLabel("Текст");
         add(lblText);
         add(txtArea2);
 
@@ -44,6 +41,7 @@ public class Clicker extends JPanel implements ActionListener {
         screenShot();
         loop(); Thread.sleep(5000);
         ctrlF(); Thread.sleep(200);
+        String writeMessage = "Написать сообщение";
         pasteWM(writeMessage); Thread.sleep(500);
         screenShot();
         loop(); Thread.sleep(350);
