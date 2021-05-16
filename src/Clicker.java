@@ -3,10 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -23,8 +20,8 @@ public class Clicker extends JPanel implements ActionListener {
     private final JLabel lblName = new JLabel("Имя и фамилия");
     private final JLabel lblText = new JLabel("Текст");
 
-    private final JTextArea txtArea1 = new JTextArea(1,15);
-    private final JTextArea txtArea2 = new JTextArea(1,15);
+    private final JTextField txtArea1 = new JTextField(15);
+    private final JTextField txtArea2 = new JTextField(15);
 
     private final JButton btn = new JButton("Запуск");
 
@@ -34,6 +31,7 @@ public class Clicker extends JPanel implements ActionListener {
 
         add(lblText);
         add(txtArea2);
+
 
         add(btn);
         btn.addActionListener(this);
