@@ -19,6 +19,8 @@ public class Clicker extends JPanel implements ActionListener {
     private final JTextField txtArea2 = new JTextField(15);
 
     private final JButton btn = new JButton("Запуск");
+    private final String[] sources = new String[] {"Друзьях","Сообщениях"};
+    private final JComboBox box = new JComboBox(sources);
 
     public Clicker() {
         JLabel lblName = new JLabel("Имя и фамилия");
@@ -29,24 +31,49 @@ public class Clicker extends JPanel implements ActionListener {
         add(lblText);
         add(txtArea2);
 
+        JLabel chooseSource = new JLabel("Искать пользователя в:");
+        add(chooseSource);
+        add(box);
 
         add(btn);
         btn.addActionListener(this);
     }
 
     public void initClicker() throws AWTException, URISyntaxException, IOException, InterruptedException {
-        start();
-        ctrlF(); Thread.sleep(200);
-        pasteName(txtArea1.getText()); Thread.sleep(500);
-        screenShot();
-        loop(); Thread.sleep(5000);
-        ctrlF(); Thread.sleep(200);
-        String writeMessage = "Написать сообщение";
-        pasteWM(writeMessage); Thread.sleep(500);
-        screenShot();
-        loop(); Thread.sleep(350);
-        pasteText(txtArea2.getText()); Thread.sleep(1500);
-        ctrlEnter();
+        if (box.getSelectedIndex() == 0) {
+            start();
+            ctrlF();
+            Thread.sleep(200);
+            pasteName(txtArea1.getText());
+            Thread.sleep(500);
+            screenShot();
+            loop();
+            Thread.sleep(5000);
+            ctrlF();
+            Thread.sleep(200);
+            String writeMessage = "Написать сообщение";
+            pasteWM(writeMessage);
+            Thread.sleep(500);
+            screenShot();
+            loop();
+            Thread.sleep(350);
+            pasteText(txtArea2.getText());
+            Thread.sleep(1500);
+            ctrlEnter();
+        } else {
+            start();
+            ctrlF();
+            Thread.sleep(200);
+            pasteName(txtArea1.getText());
+            Thread.sleep(500);
+            screenShot();
+            loop(); Thread.sleep(500);
+            pasteText(txtArea2.getText());
+            Thread.sleep(1500);
+            Robot enter = new Robot();
+            enter.keyPress(KeyEvent.VK_ENTER);
+            enter.keyRelease(KeyEvent.VK_ENTER);
+        }
     }
 
     public boolean checkOnEmpty() {
@@ -66,9 +93,15 @@ public class Clicker extends JPanel implements ActionListener {
     }
 
     public void start() throws URISyntaxException, IOException, InterruptedException {
-        URI url = new URI("https://vk.com/friends");
-        Desktop.getDesktop().browse(url);
-        Thread.sleep(10000);
+        if (box.getSelectedIndex() == 0) {
+            URI url = new URI("https://vk.com/friends");
+            Desktop.getDesktop().browse(url);
+            Thread.sleep(10000);
+        } else {
+            URI url = new URI("https://vk.com/im");
+            Desktop.getDesktop().browse(url);
+            Thread.sleep(10000);
+        }
     }
 
     public void ctrlF() throws AWTException {
